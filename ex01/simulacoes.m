@@ -29,28 +29,62 @@
 ##    premio_acum: Premio acumulado para o jogo
 function [premio_acum] = simulacoes (num_simulacoes, mat_premios)
 
+  # Calcula probabilidades de escolha das estrategias para os jogadores
   [prob1, prob2, valor] = jogo(mat_premios);
 
+  # Inicializa variavel de historico
+  historico = [];
+  
+  # Inicializa quantidade de estrategias de cada jogador
   num_estrategias_jog1 = size(prob1, 2);
   num_estrategias_jog2 = size(prob2, 2);
   
+  # Inicializa variavel de premio acumulado
+  premio_acum = 0;
   for i=1:num_simulacoes
+    # Realiza sorteios para escolha de estrategias
     sorteio1 = rand;
     sorteio2 = rand;
     
+    # Define estrategia do Jogador 1
+    acumulado = 0;
+    estrategia_jog1 = 0;
     for j=1:num_estrategias_jog1
-      if(sorteio1 <= )
-      
+      acumulado = acumulado + prob1(1,j);
+
+      # Se o valor sorteado for menor que a soma das probabilidades das estrategias
+      # ja analisadas, seleciona a estrategia
+      if(sorteio1 <= acumulado)
+        estrategia_jog1 = j;
+        break;
       endif
     end
-      
+
+    # Define estrategia do Jogador 2
+    acumulado = 0;    
+    estrategia_jog2 = 0;
     for j=1:num_estrategias_jog2
-      if(sorteio2 <= )
-      
+      acumulado = acumulado + prob2(1,j);
+
+      # Se o valor sorteado for menor que a soma das probabilidades das estrategias
+      # ja analisadas, seleciona a estrategia
+      if(sorteio2 <= acumulado)
+        estrategia_jog2 = j;
+        break;
       endif
     end
-    
+
+    # Armazena dados no historico para possivel conferencia
+    # 1 - Valor sorteado para escolha da estrategia do Jogador 1
+    # 2 - Estrategia do Jogador 1    
+    # 3 - Valor sorteado para escolha da estrategia do Jogador 2
+    # 4 - Estrategia do Jogador 2    
+    # 5 - Premio do jogo
+    historico = [historico; sorteio1, estrategia_jog1, sorteio2, estrategia_jog2, mat_premios(estrategia_jog1, estrategia_jog2)];
     
   end
+  
+  # Calcula soma dos premios de todas as partidas
+  premio_acum = sum(historico(:, 5), 1);  
 
 endfunction
