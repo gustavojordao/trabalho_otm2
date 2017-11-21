@@ -27,12 +27,10 @@
 ##    num_simulacoes: Recebe o numero de simulaçoes a serem feitas
 ##    num_transicoes: Recebe o numero de transiçoes a serem feitas
 ## Retorno:
-##    historico: Matriz de tres dimensoes com o historico de resultados
-##               1a dimensao: Simulaçao
-##               2a dimensao: Transiçao
-##               3a dimensao: Primeiro valor -> valor do sorteio
-##                            Segundo valor -> estado resultado da transiçao
-function [historico] = markov (num_simulacoes, num_transicoes)
+##    probabilidades: Probabilidade de se atingir um estado absorvente
+##                    Posiçao 1: Estado 0
+##                    Posiçao 2: Estado 4
+function [probabilidades] = markov (num_simulacoes, num_transicoes)
 
   # Preenche matriz de probabilidades da cadeia de Markov  
   cadeia = [   1   0   0   0   0;
@@ -46,6 +44,11 @@ function [historico] = markov (num_simulacoes, num_transicoes)
 
   # Inicializa matriz de resultados
   historico = zeros(num_simulacoes, num_transicoes, 2);
+  
+  # Inicializa vetor de probabilidades de atingir estados absorventes
+  # (1) -> Estado 0
+  # (2) -> Estado 4
+  probabilidades = zeros(1, 2);
   
   # Executa simulaçoes
   for i=1:num_simulacoes
@@ -69,9 +72,22 @@ function [historico] = markov (num_simulacoes, num_transicoes)
           break;
         endif
       end
+      
       # Armazena resultado no historico
-      historico(i, j, :) = [sorteio; estado];      
+      historico(i, j, :) = [sorteio; estado];
+
+      if (estado == 0)
+        probabilidades(1, 1) = probabilidades(1, 1)+1;
+        break;
+      elseif (estado == 4)
+        probabilidades(1, 2) = probabilidades(1, 2)+1;
+        break;
+      endif
+      
     end
+    
   end
 
+  probabilidades(:) = probabilidades(:)/num_simulacoes;
+  
 endfunction
