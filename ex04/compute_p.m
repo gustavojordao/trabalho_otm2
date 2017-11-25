@@ -1,3 +1,7 @@
+## Trabalho de Otimizaçao II
+
+## Exercicio 4 - Sistema de Filas
+
 ################################################################################
 
 ## Autores:
@@ -7,6 +11,21 @@
 ##    Lucas ... (...)
 
 ################################################################################
+
+## A funçao criada calcula a probabilidade de n clientes se encontrarem na fila.
+## Recebe como parametro :
+## - p (numero de clientes na fila)
+## - ro (fator de utilizacao)
+## - lambda (taxa de chegada - numero de clientes por minuto)
+## - mu (taxa de atendimento - numero de clientes por minuto)
+## - s (numero de atendentes no sistema de fila)
+## - P0 (probabilidade de ter 0 clientes na fila)
+
+## Retorno:
+## 	- Pn: probabilidade de n clientes se encontrarem na fila
+
+################################################################################
+
 
 function Pn = compute_p(p, ro, lambda, mu, s, p0)
     if s == 1

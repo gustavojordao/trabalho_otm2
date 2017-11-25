@@ -1,3 +1,7 @@
+## Trabalho de Otimizaçao II
+
+## Exercicio 4 - Sistema de Filas
+
 ################################################################################
 
 ## Autores:
@@ -7,6 +11,20 @@
 ##    Lucas ... (...)
 
 ################################################################################
+
+## A funçao criada calcula o comprimento esperado da fila.
+## Recebe como parametro :
+## - s (numero de atendentes no sistema de fila)
+## - lambda (taxa de chegada - numero de clientes por minuto)
+## - mu (taxa de atendimento - numero de clientes por minuto)
+## - P0 (probabilidade de ter 0 clientes na fila)
+## - ro (fator de utilizacao)
+
+## Retorno:
+## 	- Lq: comprimento esperado da fila
+
+################################################################################
+
 
 function Lq = compute_Lq(s, lambda, mu, P0, ro)
     if s == 1 

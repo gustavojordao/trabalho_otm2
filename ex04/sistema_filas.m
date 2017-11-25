@@ -8,6 +8,12 @@
 
 ################################################################################
 
+## Script que calcula todas as grandezas (chamando cada funcao) para cada numero
+## de atendentes (de 1 ate 4).
+
+################################################################################
+
+
 function sistema_filas(lambda, mu)
     
     for s = 1:4

@@ -1,3 +1,7 @@
+## Trabalho de Otimizaçao II
+
+## Exercicio 4 - Sistema de Filas
+
 ################################################################################
 
 ## Autores:
@@ -7,6 +11,19 @@
 ##    Lucas ... (...)
 
 ################################################################################
+
+## A funçao criada calcula a probabilidade de nenhum cliente estar na fila.
+## Recebe como parametro :
+## - ro (fator de utilizacao)
+## - s (numero de atendentes no sistema de fila)
+## - lambda (taxa de chegada - numero de clientes por minuto)
+## - mu (taxa de atendimento - numero de clientes por minuto)
+
+## Retorno:
+## 	- P0: probabilidade de nenhum cliente se encontrar na fila
+
+################################################################################
+
 
 function P0 = compute_p0(ro, s, lambda, mu)
     if s == 1
