@@ -13,7 +13,7 @@
 ##    Daniel ... (...)
 ##    Érica Yuri Yoshiwara (201212040180)
 ##    Gustavo Jordão Nunes (201212040520)
-##    LLucas Ramon dos Santos Alves (201222040115)
+##    Lucas Ramon dos Santos Alves (201222040115)
 
 ################################################################################
 
