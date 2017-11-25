@@ -1,0 +1,35 @@
+%% Trabalho de Otimizaçao II
+
+%% Exercicio 4
+
+%% Visando analisar o comportamento sistemas de fila M/M/s, construa um script
+%% com uma função que receba a taxa de chegada, lambda (número de clientes por
+%% minuto), e a taxa de atendimento, mu (número de clientes por minuto). Para s
+%% pertencente {1, 2, 3, 4}, tal script deve apresentar uma tabela 
+
+################################################################################
+
+## Autores:
+##    Daniel ... (...)
+##    Érica Yuri Yoshiwara (201212040...)
+##    Gustavo Jordão Nunes (201212040520)
+##    Lucas ... (...)
+
+################################################################################
+
+## A funçao criada recebe como parametro a matriz de premios e retorna tres variaveis
+## como resultado, sendo elas, as probabilidades de vitoria do primeiro jogador de acordo
+## com a estrategia escolhida, as probabilidades de vitoria do segundo jogador de acordo
+## com a estrategia escolhida e o valor da soluçao otima do jogo.
+
+################################################################################
+
+## Argumentos:
+##    premios: Recebe a matriz de premios associada ao jogo.
+##             As linhas representam as estrategias do Jogador 1.
+##             As colunas representam as estragias do Jogador 2.
+## Retorno:
+##    prob1: Probabilidades de vitoria do Jogador 1 de acordo com cada estrategia
+##    prob2: Probabilidades de vitoria do Jogador 2 de acordo com cada estrategia
+##    valor: Valor da soluçao otima do jogo
+function [prob1, prob2, valor] = jogo (premios)
