@@ -1,6 +1,6 @@
 ## Trabalho de Otimizaçao II
 
-## Exercicio 4 - Sistema de Filas
+## Exercicio 4
 
 ## Visando analisar o comportamento sistemas de fila M/M/s, construa um script
 ## com uma função que receba a taxa de chegada, lambda (número de clientes por minuto), 
