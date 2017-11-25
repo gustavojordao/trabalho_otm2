@@ -18,49 +18,52 @@
 ##    s:      Recebe o número de atendentes do sistema de filas
 ##    T:      Recebe o número de iterações
 ## Retorno:
-##    fila: Vetor com todos que estão esperando na fila.
-##    total: Vetor com todos que estão no sistema de fila.
+##    vFila: Vetor que armazena o número de clientes que aguardam atendimento ao 
+##          logo do tempo.
+##    vTotal: Vetor que armazena o total de clientes no sistema ao logo do tempo.
 
 ################################################################################
 
-
-function [fila, total] = fila(lambda, mi, s, T)
+function [vFila, vTotal] = fila(lambda, mi, s, T)
+  % Vetores que armazenam o número de clientes na fila e total ao longo do tempo. 
+  vFila = [];
+  vTotal = [];  
+  
+  % Vetores representam os clientes na fila e em atendimento.
   fila = [];
-  total = []; 
   atendimento = [];
   
   for a = 1:T   
 
-    % Da fila para o atendimento
+    % Passando da fila para o atendimento
     for y = 1:s      
-      if size(atendimento,1) < s & !isempty(fila)
+      if length(atendimento) < s && length(fila) > 0
           atendimento = [atendimento; fila(1)];
           fila(1) = [];
       end
     end
-
     
-    % Entrada na fila
+    % Entrada no sistema de fila
     x = rand;
     if x < lambda      
-      if size(atendimento,1) <= s
+      if length(atendimento) < s
         atendimento = [atendimento ; a];
       else
         fila = [fila ; a];
       end
     end     
-     
     
-    % saida do atendimento
+    % Saida do atendimento
     for b = 1:s
       x = rand;
-      if x < lambda & !isempty(atendimento)          
+      if x < mi && length(atendimento) > 0
           atendimento(1) = [];
       end
     end
-     
-    total = [atendimento ; fila];
-    
+
+    vFila = [vFila; length(fila)]; 
+    vTotal = [vTotal; length(fila) + length(atendimento)];
+   
   end
   
 end
