@@ -8,47 +8,84 @@
 
 ################################################################################
 
-## Script que calcula todas as grandezas (chamando cada funcao) para cada numero
-## de atendentes (de 1 ate 4).
-
-################################################################################
-
-
 function sistema_filas(lambda, mu)
     
+    resultados = [];
+    
+    coluna = [];
+    coluna = [cellstr('s')];
+    coluna = [coluna; cellstr('ro')];
+    coluna = [coluna; cellstr('P0')];
+    
+    for p = 1:10
+        if p == 1 || p == 2 || p == 5 || p == 10
+            coluna = [coluna; cellstr(sprintf('P%d', p))];
+        end
+    end
+    
+    coluna = [coluna; cellstr('Lq')];
+    coluna = [coluna; cellstr('L')];
+                                  
+    coluna = [coluna; cellstr('Wq')];
+    coluna = [coluna; cellstr('W')];
+    
+    for t = 0:5
+        if t == 0 || t == 1 || t == 2 || t == 5
+            coluna = [coluna; cellstr(sprintf('P(Wq > %d)', t))];
+        end
+    end
+ 
+    cabecalho = coluna;
+    
+ 
     for s = 1:4
-       fprintf('s = %d\n', s);
+       
+       coluna = [];
+       coluna = [coluna; s];
+
        ro = lambda/(s * mu);
-       fprintf('ro = %f\n', ro);
+       coluna = [coluna; ro];
         
        P0 = compute_p0(ro, s, lambda, mu);
-       fprintf('P0 = %f\n', P0);
+       coluna = [coluna; P0];
        
        for p = 1:10
            if p == 1 || p == 2 || p == 5 || p == 10
                 Pn = compute_p(p, ro, lambda, mu, s, P0);
-                fprintf('P%d = %f\n', p, Pn);
+                coluna = [coluna; Pn];
            end
        end
        
        Lq = compute_Lq(s, lambda, mu, P0, ro);
-       fprintf('Lq = %f\n', Lq);
+       coluna = [coluna; Lq];
        
        L = compute_L(s, lambda, mu, Lq);
-       fprintf('L = %f\n', L);
+       coluna = [coluna; L];
        
        Wq = compute_Wq(s, lambda, mu, Lq);
-       fprintf('Wq = %f\n', Wq);
+       coluna = [coluna; Wq];
        
        W = compute_W(s, lambda, mu, Wq);
-       fprintf('W = %f\n', W);
+       coluna = [coluna; W];
        
        for t = 0:5
            if t == 0 || t == 1 || t == 2 || t == 5
                 PWq = compute_PWq(p, ro, lambda, mu, s, P0, t);
-                fprintf('P(Wq > %d) = %f\n', t, PWq);
+                coluna = [coluna; PWq];
            end
        end
+       
+       resultados = [resultados coluna];
+       
     end
-
+    
+    for i = 1:15
+        printf("\n%15s\t", char(cabecalho(i)));
+        for j = 1:4
+            printf("%15d\t", resultados(i, j));
+        end
+    end
+    
+    printf('\n');
+    
 end
