@@ -8,6 +8,11 @@
 
 ################################################################################
 
+## Script que calcula todas as grandezas (chamando cada funcao) para cada numero
+## de atendentes (de 1 ate 4).
+
+################################################################################
+
 function sistema_filas(lambda, mu)
     
     resultados = [];
@@ -82,7 +87,7 @@ function sistema_filas(lambda, mu)
     for i = 1:15
         printf("\n%15s\t", char(cabecalho(i)));
         for j = 1:4
-            printf("%15d\t", resultados(i, j));
+            printf("%15f\t", resultados(i, j));
         end
     end
     

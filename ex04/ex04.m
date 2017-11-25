@@ -18,19 +18,21 @@
 
 ################################################################################
 
-## A funçao criada recebe como parametro lambda (taxa de chegada - numero de clientes por minuto)
-## e a mu (taxa de atendimento - numero de clientes por minuto).
+## A funçao criada recebe como parametro :
+## - lambda (taxa de chegada - numero de clientes por minuto)
+## - mu (taxa de atendimento - numero de clientes por minuto).
+
+## Retorno:
+##    Para cada s (numero de atendentes no sistema de fila):
+##		- ro: fracao de tempo esperada em que cada atendente se encontra ocupado
+## 		- P0, P1, P2, P5, P10: probabilidade de n clientes se encontrarem na fila
+##		- L: numero de clientes esperando no sistema de fila
+## 		- Lq: comprimento esperado da fila
+##		- W: tempo de espera no sistema para cada cliente
+##		- Wq: tempo de espera na fila para cada cliente
+##		- P(Wq>0), P(Wq>1), P(Wq>2), P(Wq>5): probabilidade do tempo de espera
 
 ################################################################################
-
-## Argumentos:
-##    premios: Recebe a matriz de premios associada ao jogo.
-##             As linhas representam as estrategias do Jogador 1.
-##             As colunas representam as estragias do Jogador 2.
-## Retorno:
-##    prob1: Probabilidades de vitoria do Jogador 1 de acordo com cada estrategia
-##    prob2: Probabilidades de vitoria do Jogador 2 de acordo com cada estrategia
-##    valor: Valor da soluçao otima do jogo
 
 clear;
 close all;
