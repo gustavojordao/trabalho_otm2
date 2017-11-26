@@ -1,6 +1,7 @@
 ## Trabalho de Otimizaçao II
 
 ## Exercicio 1 - b
+## Exercicio 1 - c
 
 ## Usando a solução da questão anterior, implemente um script que solucione o
 ## jogo de par ou ı́mpar. Simule tal jogo 100 vezes e acumule os prêmios retornados.
@@ -25,9 +26,11 @@
 ##    mat_premios: Recebe a matriz de premios associada ao jogo.
 ##                 As linhas representam as estrategias do Jogador 1.
 ##                 As colunas representam as estragias do Jogador 2.
+##    max_distincao: Valor maximo da norma euclidiana entre a solucao gerada e a otima.
+##                   Quando este parametro nao for passado, nao havera distincao.
 ## Retorno:
 ##    premio_acum: Premio acumulado para o jogo
-function [premio_acum] = simulacoes (num_simulacoes, mat_premios)
+function [premio_acum] = simulacoes (num_simulacoes, mat_premios, max_distincao)
 
   # Calcula probabilidades de escolha das estrategias para os jogadores
   [prob1, prob2, valor] = jogo(mat_premios);
@@ -38,6 +41,43 @@ function [premio_acum] = simulacoes (num_simulacoes, mat_premios)
   # Inicializa quantidade de estrategias de cada jogador
   num_estrategias_jog1 = size(prob1, 2);
   num_estrategias_jog2 = size(prob2, 2);
+  
+  # Se admitir soluçao distinta, aplica modificaçao
+  if(exist('max_distincao', 'var'))
+  
+    sorteio1 = [];
+    for j=1:num_estrategias_jog1
+      sorteio1 = [sorteio1, rand];      
+    end
+    
+    # Normaliza valores
+    sorteio1 = sorteio1/sum(sorteio1(:));
+    # Calcula percentual de variaçao em cada dimensao do vetor
+    sorteio1 = sorteio1-(1/num_estrategias_jog1);
+    # Aplica escala com distinçao maxima
+    sorteio1 = max_distincao*sorteio1;
+    
+    prob1 = prob1 + sorteio1;
+    
+    sorteio2 = [];
+    for j=1:num_estrategias_jog2
+      sorteio2 = [sorteio2, rand];      
+    end
+    
+    # Normaliza valores
+    sorteio2 = sorteio2/sum(sorteio2(:));
+    # Calcula percentual de variaçao em cada dimensao do vetor
+    sorteio2 = sorteio2-(1/num_estrategias_jog2);
+    # Aplica escala com distinçao maxima
+    sorteio2 = max_distincao*sorteio2;
+    
+    prob1 = prob1 + sorteio2;
+    
+  endif
+
+  # Inicializa variaveis de sorteio
+  sorteio1 = [];
+  sorteio2 = [];
   
   # Inicializa variavel de premio acumulado
   premio_acum = 0;
@@ -74,6 +114,16 @@ function [premio_acum] = simulacoes (num_simulacoes, mat_premios)
       endif
     end
 
+    if(estrategia_jog1 == 0 || estrategia_jog2 == 0)
+      i
+      prob1
+      prob2
+      sorteio1
+      sorteio2
+      estrategia_jog1
+      estrategia_jog2
+    endif
+    
     # Armazena dados no historico para possivel conferencia
     # 1 - Valor sorteado para escolha da estrategia do Jogador 1
     # 2 - Estrategia do Jogador 1    

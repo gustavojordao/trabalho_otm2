@@ -59,9 +59,10 @@ function [prob1, prob2, valor] = jogo (premios)
   coef_restricoes = zeros(l, 1);
   coef_restricoes(l, 1) = 1;
   
-  # Inicializa limites das variaveis, inferior = 0 e superior = infinito
+  # Inicializa limites das variaveis, inferior = -infinito e superior = infinito
   lb = zeros(c, 1);
-  ub = [];
+  lb(c,1) = -inf;
+  ub = inf*ones(c, 1);
   
   # Define que as restriçoes sao do tipo >= e que a ultima e do tipo =
   ctype = "S";  
@@ -79,10 +80,10 @@ function [prob1, prob2, valor] = jogo (premios)
   #  1 -> Minimizaçao
   # -1 -> Maximizaçao
   s = -1;
-  
+    
   # Resolvendo problema de otimizaçao
   [prob1, valor, erro, extra] = glpk(objetivo, restricoes, coef_restricoes, lb, ub, ctype, vartype, s);
-
+valor
   # Removendo variavel adicionada para o objetivo
   prob1 = prob1(1:c-1,1)';
   
@@ -107,9 +108,10 @@ function [prob1, prob2, valor] = jogo (premios)
   coef_restricoes = zeros(l, 1);
   coef_restricoes(l, 1) = 1;
   
-  # Inicializa limites das variaveis, inferior = 0 e superior = infinito
+  # Inicializa limites das variaveis, inferior = -infinito e superior = infinito
   lb = zeros(c, 1);
-  ub = [];
+  lb(c,1) = -inf;
+  ub = inf*ones(c, 1);
   
   # Define que as restriçoes sao do tipo <= e que a ultima e do tipo =
   ctype = "S";  
@@ -130,7 +132,7 @@ function [prob1, prob2, valor] = jogo (premios)
   
   # Resolvendo problema de otimizaçao
   [prob2, valor, erro, extra] = glpk(objetivo, restricoes, coef_restricoes, lb, ub, ctype, vartype, s);
-
+  
   # Removendo variavel adicionada para o objetivo
   prob2 = prob2(1:c-1,1)';
   
