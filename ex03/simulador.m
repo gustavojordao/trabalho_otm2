@@ -12,9 +12,9 @@
 
 ################################################################################
 
-function x = simulador()
+function simulador(num_simulacoes)
   
-  for i = 1:100
+  for i = 1:num_simulacoes
 
     [fila1, total1] = fila(0.3, 0.25, 1, 1000);
     
@@ -23,6 +23,7 @@ function x = simulador()
     [fila3, total3] = fila(0.3, 0.2, 3, 1000);
     
     h = figure(i);
+    
     subplot(3,1,1), plot(fila1,'r',total1,'g');
     title ('Gráfico 1 - λ = 0,3, μ = 0,25, s = 1');
     xlabel ('Tempo');
@@ -40,6 +41,8 @@ function x = simulador()
     xlabel ('Tempo');
     ylabel ('Clientes');
     legend('Fila','Total');
+    
+    pause(0.2);
   
   end
 
